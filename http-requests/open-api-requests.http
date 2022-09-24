@@ -2,22 +2,13 @@
 GET https://dapi.kakao.com/v2/local/search/keyword.json?query=은행&page=1&size=10
 Authorization: KakaoAK 418ba7355f1b7a4e69347900d110b660
 
-<> 2022-09-25T000403.200.json
-<> 2022-09-24T234555.200.json
-<> 2022-09-24T234237.401.json
-<> 2022-09-24T233836.401.json
-<> 2022-09-24T233745.401.json
-<> 2022-09-24T233737.401.json
-
 ### GET NAVER API
 GET https://openapi.naver.com/v1/search/local.json?query=은행&start=1&display=10
 X-Naver-Client-id: XI9NYSr_em4IHuvJ_Ovz
 X-Naver-Client-Secret: A7Gr0_9sGZ
 
-<> 2022-09-25T001154.200.json
-<> 2022-09-25T000844.401.json
-<> 2022-09-25T000357.401.json
-<> 2022-09-25T000338.401.json
-<> 2022-09-24T235736.401.json
-<> 2022-09-24T235706.401.json
-<> 2022-09-24T235248.401.json
+### GET KAKAO API Local Test
+GET http://localhost:8080/api/v1/open-api/search/place/kakao?keyword=은행
+
+### GET NAVER API Local Test
+GET http://localhost:8080/api/v1/open-api/search/place/naver?keyword=은행

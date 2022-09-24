@@ -60,7 +60,7 @@
 
 ### `SPS` 장소 검색 서비스 API 상세
 #### 1. 장소 검색 API
-- API URL : `GET /v1/api/search/place?query=${검색 질의어}`
+- API URL : `GET /api/v1/search/place?query=${검색 질의어}`
 
 #### 2. 검색 키워드 목록 조회 API
-- API URL : `GET /v1/api/search/place/rank`
+- API URL : `GET /api/v1/search/place/rank`
