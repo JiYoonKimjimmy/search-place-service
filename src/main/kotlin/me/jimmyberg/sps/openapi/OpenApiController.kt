@@ -1,6 +1,8 @@
 package me.jimmyberg.sps.openapi
 
+import me.jimmyberg.sps.support.enumerate.OpenApiType
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -11,10 +13,10 @@ class OpenApiController(
     val openApiService: OpenApiService
 ) {
 
-    @GetMapping("/kakao")
-    fun searchPlaceByKakao(@RequestParam keyword: String) = openApiService.searchPlaceByKakao(keyword)
-
-    @GetMapping("/naver")
-    fun searchPlaceByNaver(@RequestParam keyword: String) = openApiService.searchPlaceByNaver(keyword)
+    @GetMapping("/{openApiType}")
+    fun searchPlace(
+        @PathVariable("openApiType") openApiType: OpenApiType,
+        @RequestParam keyword: String
+    ) = openApiService.searchPlace(openApiType = openApiType, keyword = keyword)
 
 }

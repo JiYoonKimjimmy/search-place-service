@@ -1,0 +1,17 @@
+open-api:
+  kakao:
+    search:
+      place:
+        host: https://dapi.kakao.com
+        path: /v2/local/search/keyword.{format}
+        format: json
+        authorization-key: 418ba7355f1b7a4e69347900d110b660
+  naver:
+    search:
+      place:
+        host: https://openapi.naver.com
+        path: /v1/search/local.{format}
+        format: json
+        client-id: XI9NYSr_em4IHuvJ_Ovz
+        client-secret: A7Gr0_9sGZ
+
