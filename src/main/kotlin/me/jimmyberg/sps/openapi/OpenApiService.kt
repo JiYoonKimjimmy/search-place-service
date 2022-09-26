@@ -13,19 +13,19 @@ import reactor.core.publisher.Flux
 @Service
 class OpenApiService(
     val webClient: WebClient,
-    val SearchPlaceKakaoApi: SearchPlaceApi.Kakao,
-    val SearchPlaceNaverApi: SearchPlaceApi.Naver
+    val searchPlaceKakaoApi: SearchPlaceApi.Kakao,
+    val searchPlaceNaverApi: SearchPlaceApi.Naver
 ) {
 
     fun searchPlace(openApiType: OpenApiType, keyword: String): Flux<*> =
         when (openApiType) {
             KAKAO -> SearchPlaceByKakaoRequest(keyword = keyword).process(
                 webClient = webClient,
-                properties = SearchPlaceKakaoApi
+                properties = searchPlaceKakaoApi
             )
             NAVER -> SearchPlaceByNaverRequest(keyword = keyword).process(
                 webClient = webClient,
-                properties = SearchPlaceNaverApi
+                properties = searchPlaceNaverApi
             )
         }
 
