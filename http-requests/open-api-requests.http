@@ -8,7 +8,10 @@ X-Naver-Client-id: XI9NYSr_em4IHuvJ_Ovz
 X-Naver-Client-Secret: A7Gr0_9sGZ
 
 ### GET KAKAO API Local Test
-GET http://localhost:8080/api/v1/open-api/search/place/KAKAO?keyword=은행
+GET http://localhost:8080/api/v1/open-api/search/place/KAKAO?keyword=카카오뱅크
 
 ### GET NAVER API Local Test
-GET http://localhost:8080/api/v1/open-api/search/place/NAVER?keyword=은행
+GET http://localhost:8080/api/v1/open-api/search/place/NAVER?keyword=카카오뱅크
+
+### GET Search Place API Test
+GET http://localhost:8080/api/v1/search/place?keyword=카카오뱅크

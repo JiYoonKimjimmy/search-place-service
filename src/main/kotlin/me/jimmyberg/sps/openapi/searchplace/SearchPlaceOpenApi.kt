@@ -3,7 +3,7 @@ package me.jimmyberg.sps.openapi.searchplace
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Configuration
 
-class SearchPlaceApi {
+class SearchPlaceOpenApi {
 
     @ConfigurationProperties(prefix = "open-api.kakao.search.place")
     @Configuration

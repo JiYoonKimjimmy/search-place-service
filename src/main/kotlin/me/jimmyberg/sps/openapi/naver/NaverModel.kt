@@ -1,6 +1,7 @@
 package me.jimmyberg.sps.openapi.naver
 
-import me.jimmyberg.sps.openapi.searchplace.SearchPlaceApi
+import me.jimmyberg.sps.api.v1.searchplace.SearchPlaceModel
+import me.jimmyberg.sps.openapi.searchplace.SearchPlaceOpenApi
 import org.springframework.web.reactive.function.client.WebClient
 import java.net.URI
 import java.net.URLEncoder
@@ -16,14 +17,18 @@ data class SearchPlaceByNaverRequest(
 ) {
     private fun params() = "?query=${URLEncoder.encode(keyword, StandardCharsets.UTF_8)}&start=$start&display=$display"
 
-    fun process(webClient: WebClient, properties: SearchPlaceApi.Naver) =
+    fun process(webClient: WebClient, properties: SearchPlaceOpenApi.Naver) =
         webClient
             .get()
             .uri(URI("${properties.url()}${params()}"))
             .header("X-Naver-Client-id", properties.clientId)
             .header("X-Naver-Client-Secret", properties.clientSecret)
             .retrieve()
-            .bodyToFlux(SearchPlaceByNaverResponse::class.java)
+            .bodyToMono(SearchPlaceByNaverResponse::class.java)
+            .block()
+            ?.items
+            ?.map { SearchPlaceModel().also { model -> model.title = it.title } }
+            ?: listOf()
 }
 
 /**
@@ -33,6 +38,6 @@ data class SearchPlaceByNaverResponse(
     val items: List<Item>? = null
 ) {
     data class Item(
-        val title: String? = null
+        val title: String
     )
 }

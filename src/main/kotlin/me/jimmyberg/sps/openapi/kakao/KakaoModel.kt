@@ -1,7 +1,8 @@
 package me.jimmyberg.sps.openapi.kakao
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import me.jimmyberg.sps.openapi.searchplace.SearchPlaceApi
+import me.jimmyberg.sps.api.v1.searchplace.SearchPlaceModel
+import me.jimmyberg.sps.openapi.searchplace.SearchPlaceOpenApi
 import org.springframework.web.reactive.function.client.WebClient
 import java.net.URI
 import java.net.URLEncoder
@@ -17,13 +18,17 @@ data class SearchPlaceByKakaoRequest(
 ) {
     private fun params() = "?query=${URLEncoder.encode(keyword, StandardCharsets.UTF_8)}&page=$page&size=$size"
 
-    fun process(webClient: WebClient, properties: SearchPlaceApi.Kakao) =
+    fun process(webClient: WebClient, properties: SearchPlaceOpenApi.Kakao) =
         webClient
             .get()
             .uri(URI("${properties.url()}${params()}"))
             .header("Authorization", "KakaoAK ${properties.authorizationKey}")
             .retrieve()
-            .bodyToFlux(SearchPlaceByKakaoResponse::class.java)
+            .bodyToMono(SearchPlaceByKakaoResponse::class.java)
+            .block()
+            ?.documents
+            ?.map { SearchPlaceModel().also { model -> model.title = it.placeName } }
+            ?: listOf()
 }
 
 /**
@@ -34,6 +39,6 @@ data class SearchPlaceByKakaoResponse(
 ) {
     data class Document(
         @field:JsonProperty("place_name")
-        val placeName: String? = null
+        val placeName: String
     )
 }
