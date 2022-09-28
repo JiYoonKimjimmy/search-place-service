@@ -27,7 +27,7 @@ data class SearchPlaceByNaverRequest(
             .bodyToMono(SearchPlaceByNaverResponse::class.java)
             .block()
             ?.items
-            ?.map { SearchPlaceModel().also { model -> model.title = it.title } }
+            ?.map(SearchPlaceModel::of)
             ?: listOf()
 }
 
@@ -38,6 +38,9 @@ data class SearchPlaceByNaverResponse(
     val items: List<Item>? = null
 ) {
     data class Item(
-        val title: String
+        val title: String,
+        val telephone: String,
+        val address: String,
+        val category: String
     )
 }

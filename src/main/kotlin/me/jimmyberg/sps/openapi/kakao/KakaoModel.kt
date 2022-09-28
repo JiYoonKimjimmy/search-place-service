@@ -27,7 +27,7 @@ data class SearchPlaceByKakaoRequest(
             .bodyToMono(SearchPlaceByKakaoResponse::class.java)
             .block()
             ?.documents
-            ?.map { SearchPlaceModel().also { model -> model.title = it.placeName } }
+            ?.map(SearchPlaceModel::of)
             ?: listOf()
 }
 
@@ -39,6 +39,11 @@ data class SearchPlaceByKakaoResponse(
 ) {
     data class Document(
         @field:JsonProperty("place_name")
-        val placeName: String
+        val placeName: String,
+        val phone: String,
+        @field:JsonProperty("road_address_name")
+        val addressName: String,
+        @field:JsonProperty("category_name")
+        val categoryName: String
     )
 }

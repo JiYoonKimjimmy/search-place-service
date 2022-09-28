@@ -1,9 +1,9 @@
 ### GET KAKAO API
-GET https://dapi.kakao.com/v2/local/search/keyword.json?query=은행&page=1&size=10
+GET https://dapi.kakao.com/v2/local/search/keyword.json?query=카카오뱅크&page=1&size=10
 Authorization: KakaoAK 418ba7355f1b7a4e69347900d110b660
 
 ### GET NAVER API
-GET https://openapi.naver.com/v1/search/local.json?query=은행&start=1&display=10
+GET https://openapi.naver.com/v1/search/local.json?query=카카오뱅크&start=1&display=10
 X-Naver-Client-id: XI9NYSr_em4IHuvJ_Ovz
 X-Naver-Client-Secret: A7Gr0_9sGZ
 

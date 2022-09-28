@@ -1,16 +1,30 @@
 package me.jimmyberg.sps.api.v1.searchplace
 
-import kotlin.reflect.KProperty
+import me.jimmyberg.sps.openapi.kakao.SearchPlaceByKakaoResponse
+import me.jimmyberg.sps.openapi.naver.SearchPlaceByNaverResponse
 
-class SearchPlaceModel {
-    var title: String by Delegate()
-}
+data class SearchPlaceModel(
+    val name: String,
+    val phone: String,
+    val address: String,
+    val category: String
+) {
+    companion object {
+        fun of(document: SearchPlaceByKakaoResponse.Document): SearchPlaceModel =
+            SearchPlaceModel(
+                name = document.placeName.removeHTML(),
+                phone = document.phone,
+                address = document.addressName,
+                category = document.categoryName
+            )
 
-class Delegate {
-    private var value: String = ""
-    operator fun getValue(searchPlaceModel: SearchPlaceModel, property: KProperty<*>): String = value
-    operator fun setValue(searchPlaceModel: SearchPlaceModel, property: KProperty<*>, s: String) {
-        value = s.replace("<.*?>".toRegex(), "")
+        fun of(item: SearchPlaceByNaverResponse.Item): SearchPlaceModel =
+            SearchPlaceModel(
+                name = item.title.removeHTML(),
+                phone = item.telephone,
+                address = item.address,
+                category = item.category
+            )
     }
 }
 
@@ -18,3 +32,5 @@ data class SearchPlaceResponse(
     val places: List<SearchPlaceModel>,
     val size: Int
 )
+
+fun String.removeHTML() = this.replace("<.*?>".toRegex(), "")
