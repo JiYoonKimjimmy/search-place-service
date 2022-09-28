@@ -1,7 +1,7 @@
 package me.jimmyberg.sps.api.v1.keyword
 
 data class FindKeywordTopRankResponse(
-    val keywordTopRanks: List<KeywordTopRank>
+    val ranking: List<KeywordTopRank>
 )
 
 data class KeywordTopRank(

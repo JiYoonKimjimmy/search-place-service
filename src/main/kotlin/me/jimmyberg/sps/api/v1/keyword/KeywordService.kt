@@ -22,7 +22,7 @@ class KeywordService(
                     count = keywordCount.count
                 )
             }
-            .let { FindKeywordTopRankResponse(keywordTopRanks = it) }
+            .let { FindKeywordTopRankResponse(ranking = it) }
 
     /**
      * 검색 Keyword count 변경 처리
