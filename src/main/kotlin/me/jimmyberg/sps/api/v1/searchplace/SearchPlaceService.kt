@@ -1,5 +1,6 @@
 package me.jimmyberg.sps.api.v1.searchplace
 
+import me.jimmyberg.sps.api.v1.keyword.KeywordService
 import me.jimmyberg.sps.openapi.OpenApiService
 import me.jimmyberg.sps.support.enumerate.OpenApiType
 import org.springframework.stereotype.Service
@@ -7,9 +8,13 @@ import java.util.*
 
 @Service
 class SearchPlaceService(
-    val openApiService: OpenApiService
+    val openApiService: OpenApiService,
+    val keywordService: KeywordService
 ) {
 
+    /**
+     * 장소 검색 요청 처리
+     */
     fun searchPlace(keyword: String): SearchPlaceResponse =
         mutableListOf<SearchPlaceModel>()
             .also { places ->
@@ -29,6 +34,9 @@ class SearchPlaceService(
                 }
             }.let {
                 SearchPlaceResponse(places = it, size = it.size)
+            }.also {
+                // 검색 Keyword count 변경 처리
+                keywordService.updateKeywordCount(keyword)
             }
 
 }
