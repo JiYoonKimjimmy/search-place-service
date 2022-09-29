@@ -27,38 +27,10 @@
 
 ---
 
-### 장소 검색 조회 Open API 정보
-#### 카카오 장소 검색 API
-##### 기본 정보
-- DOC : [kakao developers - 로컬 API](https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword)
-- Host : `dapi.kakao.com`
-- URL : `GET /v2/local/search/keyword.${FORMAT}`
-  - `{FORMAT}` : `JSON`(default) or `XML`
-
-##### Parameter
-| Name  |  Type   | Required | Description                         |
-|:-----:|:-------:|:--------:|-------------------------------------|
-| query | String  |    Y     | 검색 질의어                              |
-| page  | Integer |    N     | 결과 페이지 번호 (최소: 1, 최대: 45, 기본값: 1)   |
-| size  | Integer |    N     | 페이지 표시 문서 개수 (최소: 1, 최대 45, 기본값: 1) |
-
-#### 네이버 장소 검색 API
-##### 기본 정보
-- DOC : [NAVER Developers - 지역 검색 API](https://developers.naver.com/docs/serviceapi/search/local/local.md#%EC%A7%80%EC%97%AD)
-- Host : openapi.naver.com
-- URL : `GET /v1/search/local.${FORMAT}`
-  - `{FORMAT}` : `JSON`(default) or `XML`
-
-##### Parameter
-|  Name   |  Type   | Required | Description                     |
-|:-------:|:-------:|:--------:|---------------------------------|
-|  query  | String  |    Y     | 검색 질의어                          |
-|  start  | Integer |    N     | 검색 시작 위치 (최소: 1, 기본값: 1)        |
-| display | Integer |    N     | 페이지 표시 검색 결과 개수 (최소: 1, 기본값: 1) |
-
----
-
 ## `SPS` 장소 검색 서비스 API 상세
+#### [HTTP Request 테스트](./http-requests/sps-api-requests.http)
+- 파일 위치 : `/http-requests/sps-api-requests.http`
+
 ### 1. 장소 검색 API
 - API URL : `GET /api/v1/search/place?keyword=${검색 질의어}`
 
@@ -115,3 +87,34 @@
 ##### QueryDSL 적용
 - 동적 Query 개발을 위해 `QueryDSL` 적용
 - `order by`, `limit` 활용하여 요청 `limit` 크기에 맞게 검색 키워드 랭킹 조회 처리
+
+---
+
+### 장소 검색 조회 Open API 정보
+#### 카카오 장소 검색 API
+##### 기본 정보
+- DOC : [kakao developers - 로컬 API](https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword)
+- Host : `dapi.kakao.com`
+- URL : `GET /v2/local/search/keyword.${FORMAT}`
+  - `{FORMAT}` : `JSON`(default) or `XML`
+
+##### Parameter
+| Name  |  Type   | Required | Description                         |
+|:-----:|:-------:|:--------:|-------------------------------------|
+| query | String  |    Y     | 검색 질의어                              |
+| page  | Integer |    N     | 결과 페이지 번호 (최소: 1, 최대: 45, 기본값: 1)   |
+| size  | Integer |    N     | 페이지 표시 문서 개수 (최소: 1, 최대 45, 기본값: 1) |
+
+#### 네이버 장소 검색 API
+##### 기본 정보
+- DOC : [NAVER Developers - 지역 검색 API](https://developers.naver.com/docs/serviceapi/search/local/local.md#%EC%A7%80%EC%97%AD)
+- Host : openapi.naver.com
+- URL : `GET /v1/search/local.${FORMAT}`
+  - `{FORMAT}` : `JSON`(default) or `XML`
+
+##### Parameter
+|  Name   |  Type   | Required | Description                     |
+|:-------:|:-------:|:--------:|---------------------------------|
+|  query  | String  |    Y     | 검색 질의어                          |
+|  start  | Integer |    N     | 검색 시작 위치 (최소: 1, 기본값: 1)        |
+| display | Integer |    N     | 페이지 표시 검색 결과 개수 (최소: 1, 기본값: 1) |
