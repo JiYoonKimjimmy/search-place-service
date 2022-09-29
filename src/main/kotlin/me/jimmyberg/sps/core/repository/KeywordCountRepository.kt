@@ -4,10 +4,13 @@ import com.querydsl.jpa.impl.JPAQueryFactory
 import me.jimmyberg.sps.core.entity.KeywordCount
 import me.jimmyberg.sps.core.entity.QKeywordCount
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Lock
 import org.springframework.stereotype.Repository
 import java.util.*
+import javax.persistence.LockModeType
 
 interface KeywordCountRepository : JpaRepository<KeywordCount, Long>, KeywordCountQRepository {
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
     fun findByKeyword(keyword: String): Optional<KeywordCount>
 }
 

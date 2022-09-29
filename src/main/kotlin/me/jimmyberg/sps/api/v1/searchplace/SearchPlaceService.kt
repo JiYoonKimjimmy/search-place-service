@@ -5,7 +5,7 @@ import me.jimmyberg.sps.openapi.OpenApiService
 import me.jimmyberg.sps.support.enumerate.OpenApiType.KAKAO
 import me.jimmyberg.sps.support.enumerate.OpenApiType.NAVER
 import org.springframework.stereotype.Service
-import java.util.LinkedList
+import java.util.*
 
 @Service
 class SearchPlaceService(
@@ -54,3 +54,4 @@ class SearchPlaceService(
     }
 
 }
+

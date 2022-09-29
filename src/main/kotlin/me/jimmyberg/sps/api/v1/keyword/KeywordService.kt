@@ -3,6 +3,7 @@ package me.jimmyberg.sps.api.v1.keyword
 import me.jimmyberg.sps.core.entity.KeywordCount
 import me.jimmyberg.sps.core.repository.KeywordCountRepository
 import org.springframework.stereotype.Service
+import javax.transaction.Transactional
 
 @Service
 class KeywordService(
@@ -27,6 +28,7 @@ class KeywordService(
     /**
      * 검색 Keyword count 변경 처리
      */
+    @Transactional
     fun updateKeywordCount(keyword: String) =
         keywordCountRepository
             .findByKeyword(keyword)

@@ -84,8 +84,8 @@
 
 ##### Keyword 검색 건수 처리 동시성 관리
 - `KEYWORD_COUNT` 테이블 생성
-- 검색 API 요청 처리 완료 후, `async` 비동기 처리 방식을 활용하여 Keyword 검색 건수 변경 처리
-- 동시 요청 처리를 위해 DB 테이블 **`명시적 Lock`을 통해 동시성 관리**
+- 검색 API 요청 처리 완료 후, Keyword 검색 건수 변경 처리
+- 동시 요청 처리를 위해 DB 테이블 **`PESSIMISTIC_WRITE` 비관적 Lock 모드를 통해 동시성 관리**
 
 ---
 
@@ -106,6 +106,12 @@
 |  count  |  Int   |    Y     | Keyword 검색 건수 |
 
 #### 기능 구현
+##### `KEYWORD_COUNT` 테이블 정의
+| Column | Type | Description |
+| id | BIGINT | Sequence ID |
+| KEYWORD | VARCHAR | 검색 Keyword |
+| COUNT | BIGINT | 검색 건수 |
+
 ##### QueryDSL 적용
 - 동적 Query 개발을 위해 `QueryDSL` 적용
 - `order by`, `limit` 활용하여 요청 `limit` 크기에 맞게 검색 키워드 랭킹 조회 처리

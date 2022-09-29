@@ -1,21 +1,20 @@
 ### GET KAKAO Open-API
-#  %EC%B9%B4%EC%B9%B4%EC%98%A4%EB%B1%85%ED%81%AC
-GET https://dapi.kakao.com/v2/local/search/keyword.json?query=코나아이&page=1&size=10
+GET https://dapi.kakao.com/v2/local/search/keyword.json?query=카카오뱅크&page=1&size=10
 Authorization: KakaoAK 418ba7355f1b7a4e69347900d110b660
 
 ### GET NAVER Open-API
-GET https://openapi.naver.com/v1/search/local.json?query=코나아이&start=1&display=5
+GET https://openapi.naver.com/v1/search/local.json?query=카카오뱅크&start=1&display=5
 X-Naver-Client-id: XI9NYSr_em4IHuvJ_Ovz
 X-Naver-Client-Secret: A7Gr0_9sGZ
 
 ### GET KAKAO Open-API Local Test
-GET http://localhost:8080/api/v1/open-api/search/place/KAKAO?keyword=코나아이
+GET http://localhost:8080/api/v1/open-api/search/place/KAKAO?keyword=카카오뱅크
 
 ### GET NAVER Open-API Local Test
-GET http://localhost:8080/api/v1/open-api/search/place/NAVER?keyword=코나아이
+GET http://localhost:8080/api/v1/open-api/search/place/NAVER?keyword=카카오뱅크
 
 ### GET Search Place API Test
-GET http://localhost:8080/api/v1/search/place?keyword=코나아이
+GET http://localhost:8080/api/v1/search/place?keyword=카카오뱅크
 
 ### GET Find Keyword Rank Test
 GET http://localhost:8080/api/v1/keyword/ranking/3
