@@ -1,3 +1,11 @@
+### GET 장소 검색 API Test
+GET http://localhost:8080/api/v1/search/place?keyword=카카오뱅크
+
+### GET 검색 Keyword 목록 조회 API Test
+GET http://localhost:8080/api/v1/keyword/ranking/10
+
+# 기타 API TEST #
+
 ### GET KAKAO Open-API
 GET https://dapi.kakao.com/v2/local/search/keyword.json?query=카카오뱅크&page=1&size=10
 Authorization: KakaoAK 418ba7355f1b7a4e69347900d110b660
@@ -12,9 +20,3 @@ GET http://localhost:8080/api/v1/open-api/search/place/KAKAO?keyword=카카오�
 
 ### GET NAVER Open-API Local Test
 GET http://localhost:8080/api/v1/open-api/search/place/NAVER?keyword=카카오뱅크
-
-### GET Search Place API Test
-GET http://localhost:8080/api/v1/search/place?keyword=카카오뱅크
-
-### GET Find Keyword Rank Test
-GET http://localhost:8080/api/v1/keyword/ranking/3
