@@ -58,20 +58,54 @@
 
 ---
 
-### `SPS` 장소 검색 서비스 API 상세
-#### 1. 장소 검색 API
+## `SPS` 장소 검색 서비스 API 상세
+### 1. 장소 검색 API
 - API URL : `GET /api/v1/search/place?keyword=${검색 질의어}`
 
 ##### Request
 |  Name   |  Type  | Required | Description |
 |:-------:|:------:|:--------:|-------------|
-| keyword | String |    Y     | 검색 질의어      |
+| keyword | String |    Y     | 검색 Keyword  |
 
 ##### Response
-|  Name  | Type  | Required | Description |
-|:------:|:-----:|:--------:|-------------|
-| places | Array |    Y     | 장소 검색 목록    |
-|  size  |  Int  |    Y     | 검색 목록 개수    |
+|   Name   |  Type  | Required | Description |
+|:--------:|:------:|:--------:|-------------|
+|  places  | Array  |    Y     | 장소 검색 목록    |
+|   name   | String |    Y     | 장소명         |
+|  phone   | String |    N     | 전화번호        |
+| address  | String |    N     | 주소          |
+| category | String |    Y     | 업종명         |
+|   size   |  Int   |    Y     | 검색 목록 개수    |
 
-#### 2. 검색 키워드 목록 조회 API
-- API URL : `GET /api/v1/search/place/rank`
+#### 기능 구현
+##### Open-API 정보 Property 설정 관리
+- 포털 Open-API 정보 변동을 고혀하여 각 포털의 API 정보를 `Properties` 설정 파일로 관리
+- 신규 추가되는 Open-API 를 위해 도메인 별로 클래스 및 인터페이스 함수 분리
+
+##### Keyword 검색 건수 처리 동시성 관리
+- `KEYWORD_COUNT` 테이블 생성
+- 검색 API 요청 처리 완료 후, `async` 비동기 처리 방식을 활용하여 Keyword 검색 건수 변경 처리
+- 동시 요청 처리를 위해 DB 테이블 **`명시적 Lock`을 통해 동시성 관리**
+
+---
+
+### 2. 검색 Keyword 목록 조회 API
+- API URL : `GET /api/v1/keyword/ranking/{limit}`
+
+#### Request
+| Name  | Type | Required | Description |
+|:-----:|:----:|:--------:|-------------|
+| limit | Long |    Y     | 랭킹 조회 수     |
+
+#### Response
+|  Name   |  Type  | Required | Description   |
+|:-------:|:------:|:--------:|---------------|
+| ranking | Array  |    Y     | 랭킹 목록         |
+|  rank   |  Int   |    Y     | 랭킹            |
+| keyword | String |    Y     | 검색 Keyword    |
+|  count  |  Int   |    Y     | Keyword 검색 건수 |
+
+#### 기능 구현
+##### QueryDSL 적용
+- 동적 Query 개발을 위해 `QueryDSL` 적용
+- `order by`, `limit` 활용하여 요청 `limit` 크기에 맞게 검색 키워드 랭킹 조회 처리
