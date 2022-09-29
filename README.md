@@ -20,9 +20,9 @@
 ### 프로젝트 구성
 - Spring Boot
 - Spring Data JPA
+- QueryDSL
+- WebClient
 - H2
-- MongoDB
-- Caffeine Cache
 - Gradle
 
 ---
