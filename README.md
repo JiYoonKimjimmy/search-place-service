@@ -94,7 +94,7 @@
 ### 장소 검색 조회 Open API 정보
 #### 카카오 장소 검색 API
 ##### 기본 정보
-- DOC : [kakao developers - 로컬 API](https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword)
+- Doc : [kakao developers - 로컬 API](https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword)
 - Host : `dapi.kakao.com`
 - URL : `GET /v2/local/search/keyword.${FORMAT}`
   - `{FORMAT}` : `JSON`(default) or `XML`
@@ -108,7 +108,7 @@
 
 #### 네이버 장소 검색 API
 ##### 기본 정보
-- DOC : [NAVER Developers - 지역 검색 API](https://developers.naver.com/docs/serviceapi/search/local/local.md#%EC%A7%80%EC%97%AD)
+- Doc : [NAVER Developers - 지역 검색 API](https://developers.naver.com/docs/serviceapi/search/local/local.md#%EC%A7%80%EC%97%AD)
 - Host : openapi.naver.com
 - URL : `GET /v1/search/local.${FORMAT}`
   - `{FORMAT}` : `JSON`(default) or `XML`
