@@ -79,10 +79,11 @@
 
 #### 기능 구현
 ##### `KEYWORD_COUNT` 테이블 정의
-| Column | Type | Description |
-| id | BIGINT | Sequence ID |
-| KEYWORD | VARCHAR | 검색 Keyword |
-| COUNT | BIGINT | 검색 건수 |
+| Column  |  Type   | Description |
+|:-------:|:-------:|-------------|
+|   id    | BIGINT  | Sequence ID |
+| KEYWORD | VARCHAR | 검색 Keyword  |
+|  COUNT  | BIGINT  | 검색 건수       |
 
 ##### QueryDSL 적용
 - 동적 Query 개발을 위해 `QueryDSL` 적용
