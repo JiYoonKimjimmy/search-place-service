@@ -12,7 +12,7 @@ interface KeywordCountRepository : JpaRepository<KeywordCount, Long>, KeywordCou
 }
 
 interface KeywordCountQRepository {
-    fun findTopRankKeywords(): List<KeywordCount>
+    fun findKeywordRanking(limit: Long): List<KeywordCount>
 }
 
 @Repository
@@ -20,13 +20,13 @@ class KeywordCountQRepositoryImpl(
     private val jpaQueryFactory: JPAQueryFactory
 ) : KeywordCountQRepository {
 
-    override fun findTopRankKeywords(): List<KeywordCount> =
+    override fun findKeywordRanking(limit: Long): List<KeywordCount> =
         QKeywordCount.keywordCount
             .let {
                 jpaQueryFactory
                     .selectFrom(it)
                     .orderBy(it.count.desc())
-                    .limit(10)
+                    .limit(limit)
                     .fetch()
             }
 

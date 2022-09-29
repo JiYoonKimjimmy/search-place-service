@@ -10,13 +10,13 @@ class KeywordService(
 ) {
 
     /**
-     * Top Rank Keyword 조회 요청 처리
+     * Keyword Ranking 조회 요청 처리
      */
-    fun findKeywordTopRank(): FindKeywordTopRankResponse =
+    fun findKeywordRanking(limit: Long): FindKeywordTopRankResponse =
         keywordCountRepository
-            .findTopRankKeywords()
+            .findKeywordRanking(limit = limit)
             .mapIndexed { index, keywordCount ->
-                KeywordTopRank(
+                KeywordRanking(
                     rank = index + 1,
                     keyword = keywordCount.keyword,
                     count = keywordCount.count
