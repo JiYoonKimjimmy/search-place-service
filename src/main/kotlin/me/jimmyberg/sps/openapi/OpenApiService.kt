@@ -17,13 +17,13 @@ class OpenApiService(
     val searchPlaceNaverApi: SearchPlaceOpenApi.Naver
 ) {
 
-    fun searchPlace(openApiType: OpenApiType, keyword: String): List<SearchPlaceModel> =
+    fun searchPlace(openApiType: OpenApiType, keyword: String, page: Int = 1, size: Int = 5): SearchPlaceModel =
         when (openApiType) {
-            KAKAO -> SearchPlaceByKakaoRequest(keyword = keyword).process(
+            KAKAO -> SearchPlaceByKakaoRequest(keyword = keyword, page = page, size = size).process(
                 webClient = webClient,
-                properties = searchPlaceKakaoApi
+                properties = searchPlaceKakaoApi,
             )
-            NAVER -> SearchPlaceByNaverRequest(keyword = keyword).process(
+            NAVER -> SearchPlaceByNaverRequest(keyword = keyword, start = page, display = size).process(
                 webClient = webClient,
                 properties = searchPlaceNaverApi
             )

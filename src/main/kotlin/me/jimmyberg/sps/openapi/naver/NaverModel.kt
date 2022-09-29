@@ -1,5 +1,6 @@
 package me.jimmyberg.sps.openapi.naver
 
+import me.jimmyberg.sps.api.v1.searchplace.SearchPlace
 import me.jimmyberg.sps.api.v1.searchplace.SearchPlaceModel
 import me.jimmyberg.sps.openapi.searchplace.SearchPlaceOpenApi
 import org.springframework.web.reactive.function.client.WebClient
@@ -12,9 +13,10 @@ import java.nio.charset.StandardCharsets
  */
 data class SearchPlaceByNaverRequest(
     val keyword: String,
-    val start: Int? = 1,
-    val display: Int? = 5
+    val start: Int,
+    val display: Int
 ) {
+
     private fun params() = "?query=${URLEncoder.encode(keyword, StandardCharsets.UTF_8)}&start=$start&display=$display"
 
     fun process(webClient: WebClient, properties: SearchPlaceOpenApi.Naver) =
@@ -25,17 +27,19 @@ data class SearchPlaceByNaverRequest(
             .header("X-Naver-Client-Secret", properties.clientSecret)
             .retrieve()
             .bodyToMono(SearchPlaceByNaverResponse::class.java)
-            .block()
-            ?.items
-            ?.map(SearchPlaceModel::of)
-            ?: listOf()
+            .block()!!
+            .let { SearchPlaceModel(places = it.items.map(SearchPlace::of)) }
+
 }
 
 /**
  * NAVER Open API 장소 검색 응답 정보
  */
 data class SearchPlaceByNaverResponse(
-    val items: List<Item>? = null
+    val total: Int,
+    val start: Int,
+    val display: Int,
+    val items: List<Item> = listOf()
 ) {
     data class Item(
         val title: String,
