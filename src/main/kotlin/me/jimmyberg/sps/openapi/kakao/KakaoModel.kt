@@ -3,8 +3,8 @@ package me.jimmyberg.sps.openapi.kakao
 import com.fasterxml.jackson.annotation.JsonProperty
 import me.jimmyberg.sps.api.v1.searchplace.SearchPlace
 import me.jimmyberg.sps.api.v1.searchplace.SearchPlaceModel
+import me.jimmyberg.sps.core.service.WebClientService
 import me.jimmyberg.sps.openapi.searchplace.SearchPlaceOpenApi
-import org.springframework.web.reactive.function.client.WebClient
 import java.net.URI
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -20,15 +20,15 @@ data class SearchPlaceByKakaoRequest(
 
     private fun params() = "?query=${URLEncoder.encode(keyword, StandardCharsets.UTF_8)}&page=$page&size=$size"
 
-    fun process(webClient: WebClient, properties: SearchPlaceOpenApi.Kakao) =
-        webClient
-            .get()
-            .uri(URI("${properties.url()}${params()}"))
-            .header("Authorization", "KakaoAK ${properties.authorizationKey}")
-            .retrieve()
-            .bodyToMono(SearchPlaceByKakaoResponse::class.java)
-            .block()!!
-            .let { SearchPlaceModel(places = it.documents.map(SearchPlace::of), isEnd = it.meta.isEnd) }
+    fun process(webClientService: WebClientService, properties: SearchPlaceOpenApi.Kakao) =
+        webClientService
+            .get(
+                uri = URI("${properties.url()}${params()}"),
+                responseClass = SearchPlaceByKakaoResponse::class.java,
+                headers = { it.add("Authorization", "KakaoAK ${properties.authorizationKey}") }
+            )
+            .block()
+            ?.let { SearchPlaceModel(places = it.documents.map(SearchPlace::of), isEnd = it.meta.isEnd) }
 
 }
 
